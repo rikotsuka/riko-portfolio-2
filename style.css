@@ -53,10 +53,8 @@ a:hover{
 
 .works {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    display: grid;
-    height: 37px;
     grid-template-columns: 1fr 1fr;
+    height: 37px;
 }
 
 ul.pcnav {
@@ -96,19 +94,16 @@ li.menu:nth-child(2) {
     width: 100%;
 }
 .works_content img {
-    height: auto;
+    height: 300px;
     transition: transform .6s ease;
+    width: 500px;
 }
 .works_content img:hover {
     transform: scale(1.1); 
 }
 
 .works_1 {
-    margin: 30px auto;
-}
-.works_2 {
-    width: 70%;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 html {
