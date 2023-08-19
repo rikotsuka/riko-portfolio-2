@@ -186,6 +186,11 @@ a:hover:after {
     img {
         width: 100%;
     }
+    .works_content img {
+        height: 30%;
+        transition: transform .6s ease;
+        width: 100%;
+    }
 }
 @media screen and (min-width: 960px) {
 	/* 960px以上に適用されるCSS（PC用） */
