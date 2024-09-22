@@ -30,11 +30,13 @@ body {
 }
 
 .works {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
     display: grid;
     height: 37px;
+    max-width: 100%;
     grid-template-columns: 1fr 1fr;
+    z-index: -111111111111;
+    position: relative;
 }
 
 ul.pcnav {
@@ -73,13 +75,10 @@ li.menu:nth-child(2) {
 .works_1 {
     margin: 30px auto;
 }
+
 .works_2 {
     width: 70%;
     margin: 0 auto;
-}
-
-html {
-    margin: 0px 50px;
 }
 
 a {
@@ -123,6 +122,7 @@ a.link-html_2 {
     font-size: 1.5em;
     color: #b5b5b5;
 }
+
 .link-html_3 {
     font-size: 1em;
 }
@@ -130,7 +130,11 @@ a.link-html_2 {
 a:hover:after {
     transform: translate(0, 0);
 }
-
+.picture img {
+    width: 400px;
+    height: 300px;
+    float:right;
+}
 .main_text {
     width: 100%;
     text-align: center;
@@ -144,21 +148,396 @@ a:hover:after {
     font-size: 1.3em;
     font-weight: bold;
 }
+
 .works_aiit_picture {
     text-align: center;
 }
+
 .works_aiit_picture img {
     background-size: cover;
 }
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+}
+
+p {
+    line-height: 2;
+}
+
+/* ------------ ヒーローエリア ------------ */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    z-index:-1111;
+}
+
+.hero_title {
+    position: fixed;
+    width: 100%;
+    font-size: 10rem;
+    text-align: center;
+    animation: scale-down linear both;
+    animation-timeline: view();
+    animation-range: contain 50% contain 100%;
+}
+
+@keyframes scale-down {
+    to {
+        scale: 0.7;
+        opacity: 0;
+    }
+}
+
+.hero_layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-size: cover;
+}
+
+.hero_layer__back {
+    bottom: 0;
+    height: 30vh;
+    background-image: url("../images/back.svg");
+    animation: parallax-image linear both;
+    animation-timeline: view();
+    animation-range: contain 0% exit 100%;
+}
+
+@keyframes parallax-image {
+    from {
+        translate: 0 -13vh;
+    }
+}
+
+/* 画像が足りない分を書き足し */
+.hero_layer__back::after {
+    content: "";
+    position: absolute;
+    bottom: -20vh;
+    width: 100%;
+    height: 20vh;
+    background-color: #69eaca;
+}
+
+.hero_layer__front {
+    bottom: -20vh;
+    height: 40vh;
+    background-image: url("../images/front.svg");
+    animation: parallax-image-front linear both;
+    animation-timeline: view();
+    animation-range: contain 0% exit 100%;
+}
+
+@keyframes parallax-image-front {
+    to {
+        translate: 0 -5vh;
+    }
+}
+
+/* 画像が足りない分を書き足し */
+.hero_layer__front::after {
+    content: "";
+    position: absolute;
+    bottom: -10vh;
+    width: 100%;
+    height: 10vh;
+    background-color: #41cca4;
+}
+
+/* ------------------------ */
+.wrapper {
+    background-color: #41cca4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: clip;
+}
+
+/* ------------ キラキラ：opacity 鳥：offset ------------ */
+.sectionBird {
+    position: relative;
+    padding: 300px 7vw;
+    background-color: #41cca4;
+}
+
+/* キラキラ */
+.sectionBird::before,
+.sectionBird::after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 100% 50%;
+}
+img {
+    width: 90%;
+}
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+.sectionBird::before {
+    left: -18vw;
+}
+
+.sectionBird::after {
+    right: -18vw;
+    scale: -1 -1;
+}
+
+.sectionBird p {
+    max-width: 800px;
+    width: 50%;
+    height: 0px;
+    padding: 0px 80px;
+}
+.bird {
+    position: absolute;
+    top: 20%;
+    left: -120px;
+
+    /* offsetプロパティの紹介記事： https://ics.media/entry/230327/ */
+    offset-path: path("m16.335.397C8.884,6.095-1.144,31.39.729,36.776c6.402,18.409,34.762,21.381,37.982,33.361,8.471,31.513-18.708,30.613-24.591,36.49-10.986,10.974-.465,49.54,16.065,68.698,30.176,34.972,17.15,70.578-23.667,93.591");
+    offset-rotate: 0deg;
+
+    animation: fly-bird linear both;
+    animation-timeline: view();
+    animation-range: cover 0% exit 250%;
+}
+
+@keyframes fly-bird {
+    to {
+        offset-distance: 100%;
+    }
+}
+
+.bird__reverse {
+    top: unset;
+    left: unset;
+    right: -120px;
+    bottom: 40%;
+    offset-path: path("m16.335.397C8.884,6.095-1.144,31.39.729,36.776c6.402,18.409,34.762,21.381,37.982,33.361,8.471,31.513-18.708,30.613-24.591,36.49-12.555,12.542-2.606,67.337,25.866,72.92");
+    offset-rotate: 20deg;
+    scale: -1 1;
+}
+
+/* ------------ 宝石：sticky & translate & clip-path ------------ */
+.sectionPin {
+    width: 100%;
+    height: 200vh;
+    /* スクロール長め */
+}
+
+.pin_text {
+    width: calc(50vw - 100px);
+}
+
+.pin_sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-x: clip;
+    background-image: linear-gradient(#83a2cb, #D4E7F4);
+    view-timeline: --sticky-timeline;
+    /* 画像マスクアニメーション用のタイムラインを定義 */
+}
+
+.pin_wrapper {
+    display: flex;
+    gap: 100px;
+    flex-direction: row;
+    align-items: center;
+    width: 200vmax;
+    height: 100%;
+
+    animation: slide-image linear both;
+    animation-timeline: view();
+    animation-range: contain;
+    /* = contain 0% contain 100% */
+}
+
+@keyframes slide-image {
+    from {
+        translate: 50vw 0;
+    }
+
+    to {
+        translate: -550px 0;
+    }
+}
+
+.image {
+    width: 300px;
+    height: 300px;
+    animation: reveal-gem linear both;
+    animation-timeline: --sticky-timeline;
+    /* .pin_stickyに定義したタイムラインを指定 */
+    animation-range: contain 55% contain 70%;
+    /* sticky中の「縦」のスクロール量で判定 */
+}
+
+/* 円→（角丸四角形を経由）→正方形 にマスクの形状を変化させるキーフレーム */
+@keyframes reveal-gem {
+    from {
+        clip-path: inset(30% round 20%);
+    }
+
+    to {
+        clip-path: inset(0);
+    }
+}
+
+.image__2 {
+    animation-range: contain 65% contain 80%;
+}
+
+.image__3 {
+    animation-range: contain 75% contain 90%;
+}
+
+/* ------------ 雫のパララックス ------------ */
+.sectionDrop {
+    position: relative;
+    width: 100%;
+    padding: 300px 1vw;
+    background-color: #D4E7F4;
+}
+
+.sectionDrop p {
+    margin: 0 auto 40px;
+    max-width: 800px;
+}
+
+.dropGem {
+    position: absolute;
+    width: 88px;
+    height: 124px;
+    background-image: url("../images/drop-blue-01.webp");
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation: parallax-drop linear both;
+    animation-timeline: view();
+    animation-range: cover;
+    /* = cover 0% cover 100% */
+}
+
+@keyframes parallax-drop {
+    from {
+        translate: 0 200px;
+    }
+
+    to {
+        translate: 0 -200px;
+    }
+}
+
+.dropGem__blue2 {
+    background-image: url("../images/drop-blue-02.webp");
+}
+
+.dropGem__blue3 {
+    background-image: url("../images/drop-blue-03.webp");
+}
+
+.dropGem__medium {
+    scale: 0.8;
+    animation-range: entry -150% exit 250%;
+    /* 開始終了位置をオーバーにして、動く量を少なく見せています。移動量を調整した別の@keyframesを作って使用する方法も○です */
+}
+
+.dropGem__small {
+    scale: 0.6;
+    animation-range: entry -800% exit 900%;
+}
+
+.dropGem__1 {
+    top: 20%;
+    left: 15%;
+}
+
+.dropGem__2 {
+    bottom: 20%;
+    left: 10%;
+}
+
+.dropGem__3 {
+    top: 15%;
+    right: 20%;
+}
+
+.dropGem__4 {
+    top: 50%;
+    right: 15%;
+}
+
+.dropGem__5 {
+    bottom: 15%;
+    right: 25%;
+}
+
+/* ------------ 空：sticky & clip-path ------------ */
+.sectionSky {
+    position: relative;
+    width: 100%;
+    height: 170vh;
+    background-color: #D4E7F4;
+}
+
+@keyframes reveal-sky {
+    from {
+        clip-path: ellipse(60px 80px);
+    }
+
+    to {
+        clip-path: ellipse(60% 130%);
+    }
+}
+
+.sky_image {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    position: sticky;
+    top: 0;
+    animation: reveal-sky linear both;
+    animation-timeline: view();
+    animation-range: contain 0% contain 70%;
+    /* ↑ https://scroll-driven-animations.style/tools/view-timeline/ranges/#range-start-name=contain&range-start-percentage=0&range-end-name=contain&range-end-percentage=70&view-timeline-axis=block&view-timeline-inset=0&subject-size=taller&subject-animation=scale-up&interactivity=clicktodrag&show-areas=yes&show-fromto=yes&show-labels=yes */
+}
+
+.sky_text {
+    position: relative;
+    background-color: white;
+    line-height: 2;
+    max-width: 23rem;
+    padding: 1rem 2rem;
+    margin-left: 80px;
+}
+
 @media screen and (max-width: 481px) {
-	/* 481px以上に適用されるCSS（タブレット用） */
+
+    /* 481px以上に適用されるCSS（タブレット用） */
     .works {
         display: initial;
     }
+
     img {
         width: 100%;
     }
 }
+
 @media screen and (min-width: 960px) {
-	/* 960px以上に適用されるCSS（PC用） */
+    /* 960px以上に適用されるCSS（PC用） */
 }
